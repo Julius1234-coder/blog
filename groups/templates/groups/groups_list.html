@@ -1,0 +1,45 @@
+{% extends 'groups/groups_base.html' %}
+{% block pregroup %}
+    <div class = "col-md-4">
+        <div>
+            <h1> Listado de Grupos </h1>
+            {% if user.is_authenticated %}
+                <h2> Bienvenido 
+                    <a href="{% url 'posts:for_user' username = user.username%}">@{{user.username}}</a>
+                </h2>
+            {% endif %}
+            <h2> Selecciona un grupo </h2>
+        </div> 
+        {% if user_isauthenticated %}
+            <a href = "{% url 'groups:create '%}" class = "btn btn-warning" role= "button">
+                <span class = "fa fa-plus"></span>
+                Crear Grupo
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block group_content %}
+    <div class = "col-md-8">
+        <div class ="list_group">
+            {% for group in object_list %}
+                <a href = "{% url 'groups:single' slug = group.slug %}" class= 'list-group-item list-group-item-action flex-column align-items-start'>
+                <h3 class = 'mb-1'>{{group.name}}> </h3>
+                <p class= 'mb-1'> {{group.description_html |safe }}</p>
+                <div class = "d-flex w-40 justify-align-content-between">
+                    <small class ="text-text-muted">
+                        <span class "badge badge-badge-secondary">
+                            {{ group.members.count }}
+                        </span>
+                        miembros {{ group.member.count| pluralize }}
+                    </small>
+                    <small class = "text-text-muted">
+                        <span class "badge badge-badge-secondary">
+                            {{ group.posts.count }}
+                        </span>
+                        miembros {{ group.posts.count| pluralize }}
+                    </small>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

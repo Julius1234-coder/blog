@@ -1,0 +1,29 @@
+{% extend "groups_base.html" %}
+{% block pregroup %}
+    <h1> {{group.name}} </h1>
+    <h2> Numero de miembros: {{group.members.count}} </h2>
+    <div class = "content">
+        {% if user in group.member.all %}
+            <a href= "{% url 'group:leave' slug= group.slug %}" class = "btn btn-lg btn-warning">
+                <span class= "fe fe-times-circle-o"></span> 
+                Salir
+            </a>
+        {% else %}
+            <a href="{% url 'group:join' slug= group.slug %}" class = "btn btn-lg btn-warning">
+                <span class= "fe fe-times-circle-o"></span>
+                    Unirse
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block group_content %}
+    <div class = "col-md-8">
+        {% if group.post.count == 0 %}
+            <h2> No hay publicaciones en este grupo </h2>
+        {% else %}
+            {% for post in group.post.all %}
+                {% include "post/_post.html" %}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %} 
