@@ -10,7 +10,7 @@
             {% endif %}
             <h2> Selecciona un grupo </h2>
         </div> 
-        {% if user_isauthenticated %}
+        {% if user.is_authenticated %}
             <a href = "{% url 'groups:create '%}" class = "btn btn-warning" role= "button">
                 <span class = "fa fa-plus"></span>
                 Crear Grupo
@@ -23,7 +23,7 @@
         <div class ="list_group">
             {% for group in object_list %}
                 <a href = "{% url 'groups:single' slug = group.slug %}" class= 'list-group-item list-group-item-action flex-column align-items-start'>
-                <h3 class = 'mb-1'>{{group.name}}> </h3>
+                <h3 class = 'mb-1'>{{group.name}}</h3>
                 <p class= 'mb-1'> {{group.description_html |safe }}</p>
                 <div class = "d-flex w-40 justify-align-content-between">
                     <small class ="text-text-muted">

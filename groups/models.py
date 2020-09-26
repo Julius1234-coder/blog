@@ -12,7 +12,7 @@ from django import template
 register = template.Library()
 
 # Create your models here.
-class GrupoMember(models.Model):
+class GroupMember(models.Model):
     group = models.ForeignKey(Group,related_name='membership',on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='user_groups',on_delete=models.CASCADE)
 
