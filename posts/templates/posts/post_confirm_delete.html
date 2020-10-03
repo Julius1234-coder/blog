@@ -1,0 +1,13 @@
+{% extends "posts/post_base.html" %}
+{% block post_content %}
+<h3> ¿Eliminar la publicacion? </h3>
+<div class="posts">
+    {% include "posts/_post.html" with post post = object hide_delete=True %}
+</div>
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Borrar" class="btn btn-danger btnr-large">
+    <a href ="{% url 'posts:single' username = user.username pk = object.pk %}"
+    class = "btn btn-light btn-large"> Cancelar </a>
+</form>
+{% endblock %}
