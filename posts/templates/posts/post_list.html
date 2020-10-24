@@ -5,7 +5,8 @@
     {% if user.is_authenticated %}
     <div class = "card card-with-shadow">
         <div class="content">
-            <h5 class ="title"> Tus Grupos </h5>
+            <h5 class ="title"> Publicaciones </h5>
+            <a href="{% url 'posts:create' %}" class=" btn btn-primary "> Crear</a>
             <ul class="list-unstyled">
                 {% for member_group in get_user_group %}
                 <li class-"group li-with-bullet">
@@ -21,7 +22,7 @@
             <h5 class = "title"> Todos los grupos </h5>
             <ul class="list-unstyled">
                 {% for other_group in get_other_groups %}
-                    <li class="group li-with-bullet"><a href="{% url 'groups:single' slug= other_group.slug %}">{{ other_group.name }}</a></li>
+                    <li class="group li-with-bullet"><a href="{% url 'groups:single' slug=other_group.group.slug %}">{{ other_group.group.name }}</a></li>
                 {% endfor %}
             </ul>
         </div>
